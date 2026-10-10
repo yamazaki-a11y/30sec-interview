@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30秒面接｜予約</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f6f7f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+        "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: #222;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 26px 20px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    }
+
+    h1 {
+      font-size: 23px;
+      text-align: center;
+      margin: 0 0 8px;
+    }
+
+    .company {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .label {
+      display: block;
+      font-weight: 700;
+      font-size: 14px;
+      margin: 20px 0 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 52px;
+      border: 1px solid #d8dce2;
+      border-radius: 10px;
+      padding: 0 14px;
+      font-size: 16px;
+      background: white;
+    }
+
+    .slot {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #e0e3e8;
+      background: white;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .slot.selected {
+      border-color: #111;
+      background: #f5f5f5;
+    }
+
+    .slot strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .submit {
+      width: 100%;
+      height: 56px;
+      border: 0;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      font-size: 17px;
+      font-weight: 700;
+      margin-top: 28px;
+      cursor: pointer;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 14px;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 35px 10px;
+    }
+
+    .success h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .success p {
+      color: #555;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">30秒面接</div>
+
+  <div class="card" id="formCard">
+
+    <h1>面接・職場体験予約</h1>
+
+    <div class="company">
+      株式会社山翔
+    </div>
+
+    <div class="description">
+      空いている日時を選んで、必要事項を入力してください。<br>
+      約30秒で予約できます。
+    </div>
+
+    <span class="label">希望日時</span>
+
+    <button class="slot" id="slotButton" onclick="selectSlot()">
+      <strong>10月15日（木）</strong>
+      13:00〜14:00
+    </button>
+
+    <span class="label">お名前</span>
+    <input id="name" type="text" placeholder="例：山田 太郎">
+
+    <span class="label">年齢</span>
+    <input id="age" type="number" placeholder="例：25">
+
+    <span class="label">電話番号</span>
+    <input id="phone" type="tel" placeholder="例：09012345678">
+
+    <span class="label">予約内容</span>
+
+    <select id="type">
+      <option value="">選択してください</option>
+      <option>面接</option>
+      <option>職場体験</option>
+    </select>
+
+    <button class="submit" onclick="reserve()">
+      予約を確定する
+    </button>
+
+    <div class="note">
+      入力いただいた情報は予約の確認にのみ使用します。
+    </div>
+
+  </div>
+
+  <div class="card success" id="success">
+
+    <h2>予約が完了しました</h2>
+
+    <p>
+      ご予約ありがとうございます。<br>
+      担当者からの連絡をお待ちください。
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+
+let selected = false;
+
+function selectSlot() {
+  selected = true;
+  document.getElementById("slotButton").classList.add("selected");
+}
+
+function reserve() {
+
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const phone = document.getElementById("phone").value;
+  const type = document.getElementById("type").value;
+
+  if (!selected) {
+    alert("希望日時を選択してください");
+    return;
+  }
+
+  if (!name || !age || !phone || !type) {
+    alert("すべての項目を入力してください");
+    return;
+  }
+
+  document.getElementById("formCard").style.display = "none";
+  document.getElementById("success").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
